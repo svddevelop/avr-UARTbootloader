@@ -1,0 +1,917 @@
+
+uartbootloader.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000354  00001bda  00001bda  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  00001f2e  000003e8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000046  00800062  00800062  000003ea  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  000003ea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000006e  00000000  00000000  0000040a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000004d1  00000000  00000000  00000478  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000001cb  00000000  00000000  00000949  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000496  00000000  00000000  00000b14  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000070  00000000  00000000  00000fac  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000fc  00000000  00000000  0000101c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000022a  00000000  00000000  00001118  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000090  00000000  00000000  00001342  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00001bda <__vectors>:
+    1bda:	12 c0       	rjmp	.+36     	; 0x1c00 <__ctors_end>
+    1bdc:	2c c0       	rjmp	.+88     	; 0x1c36 <__bad_interrupt>
+    1bde:	2b c0       	rjmp	.+86     	; 0x1c36 <__bad_interrupt>
+    1be0:	2a c0       	rjmp	.+84     	; 0x1c36 <__bad_interrupt>
+    1be2:	29 c0       	rjmp	.+82     	; 0x1c36 <__bad_interrupt>
+    1be4:	28 c0       	rjmp	.+80     	; 0x1c36 <__bad_interrupt>
+    1be6:	27 c0       	rjmp	.+78     	; 0x1c36 <__bad_interrupt>
+    1be8:	26 c0       	rjmp	.+76     	; 0x1c36 <__bad_interrupt>
+    1bea:	25 c0       	rjmp	.+74     	; 0x1c36 <__bad_interrupt>
+    1bec:	24 c0       	rjmp	.+72     	; 0x1c36 <__bad_interrupt>
+    1bee:	23 c0       	rjmp	.+70     	; 0x1c36 <__bad_interrupt>
+    1bf0:	22 c0       	rjmp	.+68     	; 0x1c36 <__bad_interrupt>
+    1bf2:	21 c0       	rjmp	.+66     	; 0x1c36 <__bad_interrupt>
+    1bf4:	20 c0       	rjmp	.+64     	; 0x1c36 <__bad_interrupt>
+    1bf6:	1f c0       	rjmp	.+62     	; 0x1c36 <__bad_interrupt>
+    1bf8:	1e c0       	rjmp	.+60     	; 0x1c36 <__bad_interrupt>
+    1bfa:	1d c0       	rjmp	.+58     	; 0x1c36 <__bad_interrupt>
+    1bfc:	1c c0       	rjmp	.+56     	; 0x1c36 <__bad_interrupt>
+    1bfe:	1b c0       	rjmp	.+54     	; 0x1c36 <__bad_interrupt>
+
+00001c00 <__ctors_end>:
+    1c00:	11 24       	eor	r1, r1
+    1c02:	1f be       	out	0x3f, r1	; 63
+    1c04:	cf e5       	ldi	r28, 0x5F	; 95
+    1c06:	d4 e0       	ldi	r29, 0x04	; 4
+    1c08:	de bf       	out	0x3e, r29	; 62
+    1c0a:	cd bf       	out	0x3d, r28	; 61
+
+00001c0c <__do_copy_data>:
+    1c0c:	10 e0       	ldi	r17, 0x00	; 0
+    1c0e:	a0 e6       	ldi	r26, 0x60	; 96
+    1c10:	b0 e0       	ldi	r27, 0x00	; 0
+    1c12:	ee e2       	ldi	r30, 0x2E	; 46
+    1c14:	ff e1       	ldi	r31, 0x1F	; 31
+    1c16:	02 c0       	rjmp	.+4      	; 0x1c1c <.do_copy_data_start>
+
+00001c18 <.do_copy_data_loop>:
+    1c18:	05 90       	lpm	r0, Z+
+    1c1a:	0d 92       	st	X+, r0
+
+00001c1c <.do_copy_data_start>:
+    1c1c:	a2 36       	cpi	r26, 0x62	; 98
+    1c1e:	b1 07       	cpc	r27, r17
+    1c20:	d9 f7       	brne	.-10     	; 0x1c18 <.do_copy_data_loop>
+
+00001c22 <__do_clear_bss>:
+    1c22:	10 e0       	ldi	r17, 0x00	; 0
+    1c24:	a2 e6       	ldi	r26, 0x62	; 98
+    1c26:	b0 e0       	ldi	r27, 0x00	; 0
+    1c28:	01 c0       	rjmp	.+2      	; 0x1c2c <.do_clear_bss_start>
+
+00001c2a <.do_clear_bss_loop>:
+    1c2a:	1d 92       	st	X+, r1
+
+00001c2c <.do_clear_bss_start>:
+    1c2c:	a8 3a       	cpi	r26, 0xA8	; 168
+    1c2e:	b1 07       	cpc	r27, r17
+    1c30:	e1 f7       	brne	.-8      	; 0x1c2a <.do_clear_bss_loop>
+    1c32:	63 d0       	rcall	.+198    	; 0x1cfa <main>
+    1c34:	7a c1       	rjmp	.+756    	; 0x1f2a <_exit>
+
+00001c36 <__bad_interrupt>:
+    1c36:	d1 cf       	rjmp	.-94     	; 0x1bda <__vectors>
+
+00001c38 <hex2nibl>:
+uint8_t nibl2hex(uint8_t c);
+void boot_program_page (uint32_t page, uint8_t *buf);
+*/
+
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+    1c38:	8a 33       	cpi	r24, 0x3A	; 58
+    1c3a:	10 f4       	brcc	.+4      	; 0x1c40 <hex2nibl+0x8>
+    1c3c:	80 53       	subi	r24, 0x30	; 48
+    1c3e:	08 95       	ret
+	else return c+10-'A';
+    1c40:	87 53       	subi	r24, 0x37	; 55
+}
+    1c42:	08 95       	ret
+
+00001c44 <nibl2hex>:
+uint8_t nibl2hex(uint8_t c){
+	if (c < 10) return c + '0';
+    1c44:	8a 30       	cpi	r24, 0x0A	; 10
+    1c46:	10 f4       	brcc	.+4      	; 0x1c4c <nibl2hex+0x8>
+    1c48:	80 5d       	subi	r24, 0xD0	; 208
+    1c4a:	08 95       	ret
+	else return c + 'A' - 10;
+    1c4c:	89 5c       	subi	r24, 0xC9	; 201
+} 
+    1c4e:	08 95       	ret
+
+00001c50 <putch>:
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1c50:	5d 9b       	sbis	0x0b, 5	; 11
+    1c52:	fe cf       	rjmp	.-4      	; 0x1c50 <putch>
+	  UDR = ch;
+    1c54:	8c b9       	out	0x0c, r24	; 12
+	      [uartBit] "I" (UART_TX_BIT)
+	    :
+	      "r25"
+	  );
+	#endif  */
+	}//void putch(char ch)
+    1c56:	08 95       	ret
+
+00001c58 <puthex>:
+
+
+
+void puthex(char ch){
+	putch(nibl2hex((ch & 0xF0) >> 4));
+    1c58:	98 2f       	mov	r25, r24
+    1c5a:	92 95       	swap	r25
+    1c5c:	9f 70       	andi	r25, 0x0F	; 15
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+	else return c+10-'A';
+}
+uint8_t nibl2hex(uint8_t c){
+	if (c < 10) return c + '0';
+    1c5e:	9a 30       	cpi	r25, 0x0A	; 10
+    1c60:	10 f4       	brcc	.+4      	; 0x1c66 <puthex+0xe>
+    1c62:	90 5d       	subi	r25, 0xD0	; 208
+    1c64:	01 c0       	rjmp	.+2      	; 0x1c68 <puthex+0x10>
+	else return c + 'A' - 10;
+    1c66:	99 5c       	subi	r25, 0xC9	; 201
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1c68:	5d 9b       	sbis	0x0b, 5	; 11
+    1c6a:	fe cf       	rjmp	.-4      	; 0x1c68 <puthex+0x10>
+	  UDR = ch;
+    1c6c:	9c b9       	out	0x0c, r25	; 12
+
+
+
+void puthex(char ch){
+	putch(nibl2hex((ch & 0xF0) >> 4));
+	putch(nibl2hex((ch & 0x0F)));
+    1c6e:	8f 70       	andi	r24, 0x0F	; 15
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+	else return c+10-'A';
+}
+uint8_t nibl2hex(uint8_t c){
+	if (c < 10) return c + '0';
+    1c70:	8a 30       	cpi	r24, 0x0A	; 10
+    1c72:	10 f4       	brcc	.+4      	; 0x1c78 <puthex+0x20>
+    1c74:	80 5d       	subi	r24, 0xD0	; 208
+    1c76:	01 c0       	rjmp	.+2      	; 0x1c7a <puthex+0x22>
+	else return c + 'A' - 10;
+    1c78:	89 5c       	subi	r24, 0xC9	; 201
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1c7a:	5d 9b       	sbis	0x0b, 5	; 11
+    1c7c:	fe cf       	rjmp	.-4      	; 0x1c7a <puthex+0x22>
+	  UDR = ch;
+    1c7e:	8c b9       	out	0x0c, r24	; 12
+
+
+void puthex(char ch){
+	putch(nibl2hex((ch & 0xF0) >> 4));
+	putch(nibl2hex((ch & 0x0F)));
+}
+    1c80:	08 95       	ret
+
+00001c82 <boot_program_page>:
+
+void boot_program_page (uint32_t page, uint8_t *buf)
+{
+    1c82:	1f 93       	push	r17
+    1c84:	cf 93       	push	r28
+    1c86:	df 93       	push	r29
+    1c88:	da 01       	movw	r26, r20
+    uint16_t i;
+
+    // Disable interrupts.
+
+    //sreg = SREG;
+    cli();
+    1c8a:	f8 94       	cli
+
+    eeprom_busy_wait ();
+    1c8c:	e1 99       	sbic	0x1c, 1	; 28
+    1c8e:	fe cf       	rjmp	.-4      	; 0x1c8c <boot_program_page+0xa>
+    boot_page_erase (page);
+    1c90:	ab 01       	movw	r20, r22
+    1c92:	83 e0       	ldi	r24, 0x03	; 3
+    1c94:	fb 01       	movw	r30, r22
+    1c96:	80 93 57 00 	sts	0x0057, r24
+    1c9a:	e8 95       	spm
+	boot_spm_busy_wait ();
+    1c9c:	07 b6       	in	r0, 0x37	; 55
+    1c9e:	00 fc       	sbrc	r0, 0
+    1ca0:	fd cf       	rjmp	.-6      	; 0x1c9c <boot_program_page+0x1a>
+    1ca2:	fa 01       	movw	r30, r20
+        // Set up little-endian word.
+
+        uint16_t w = *buf++;
+        w += (*buf++) << 8;
+
+        boot_page_fill (page + i, w);
+    1ca4:	11 e0       	ldi	r17, 0x01	; 1
+
+    eeprom_busy_wait ();
+    boot_page_erase (page);
+	boot_spm_busy_wait ();
+
+    for (i=0; i<SPM_PAGESIZE; i+=2)
+    1ca6:	ba 01       	movw	r22, r20
+    1ca8:	60 5c       	subi	r22, 0xC0	; 192
+    1caa:	7f 4f       	sbci	r23, 0xFF	; 255
+    {
+        // Set up little-endian word.
+
+        uint16_t w = *buf++;
+    1cac:	8c 91       	ld	r24, X
+        w += (*buf++) << 8;
+    1cae:	11 96       	adiw	r26, 0x01	; 1
+    1cb0:	3c 91       	ld	r19, X
+    1cb2:	11 97       	sbiw	r26, 0x01	; 1
+    1cb4:	20 e0       	ldi	r18, 0x00	; 0
+    1cb6:	e9 01       	movw	r28, r18
+    1cb8:	c8 0f       	add	r28, r24
+    1cba:	d1 1d       	adc	r29, r1
+	putch(nibl2hex((ch & 0xF0) >> 4));
+	putch(nibl2hex((ch & 0x0F)));
+}
+
+void boot_program_page (uint32_t page, uint8_t *buf)
+{
+    1cbc:	12 96       	adiw	r26, 0x02	; 2
+        // Set up little-endian word.
+
+        uint16_t w = *buf++;
+        w += (*buf++) << 8;
+
+        boot_page_fill (page + i, w);
+    1cbe:	0e 01       	movw	r0, r28
+    1cc0:	10 93 57 00 	sts	0x0057, r17
+    1cc4:	e8 95       	spm
+    1cc6:	11 24       	eor	r1, r1
+    1cc8:	32 96       	adiw	r30, 0x02	; 2
+
+    eeprom_busy_wait ();
+    boot_page_erase (page);
+	boot_spm_busy_wait ();
+
+    for (i=0; i<SPM_PAGESIZE; i+=2)
+    1cca:	e6 17       	cp	r30, r22
+    1ccc:	f7 07       	cpc	r31, r23
+    1cce:	71 f7       	brne	.-36     	; 0x1cac <boot_program_page+0x2a>
+        w += (*buf++) << 8;
+
+        boot_page_fill (page + i, w);
+    }
+	
+    boot_page_write_safe (page);     // Store buffer in flash page.
+    1cd0:	07 b6       	in	r0, 0x37	; 55
+    1cd2:	00 fc       	sbrc	r0, 0
+    1cd4:	fd cf       	rjmp	.-6      	; 0x1cd0 <boot_program_page+0x4e>
+    1cd6:	e1 99       	sbic	0x1c, 1	; 28
+    1cd8:	fe cf       	rjmp	.-4      	; 0x1cd6 <boot_program_page+0x54>
+    1cda:	85 e0       	ldi	r24, 0x05	; 5
+    1cdc:	fa 01       	movw	r30, r20
+    1cde:	80 93 57 00 	sts	0x0057, r24
+    1ce2:	e8 95       	spm
+	boot_spm_busy_wait ();
+    1ce4:	07 b6       	in	r0, 0x37	; 55
+    1ce6:	00 fc       	sbrc	r0, 0
+    1ce8:	fd cf       	rjmp	.-6      	; 0x1ce4 <boot_program_page+0x62>
+    // Reenable RWW-section again. We need this if we want to jump back
+    // to the application after bootloading.
+
+    boot_rww_enable ();
+    1cea:	81 e1       	ldi	r24, 0x11	; 17
+    1cec:	80 93 57 00 	sts	0x0057, r24
+    1cf0:	e8 95       	spm
+
+    // Re-enable interrupts (if they were ever enabled).
+
+    //SREG = sreg;
+}
+    1cf2:	df 91       	pop	r29
+    1cf4:	cf 91       	pop	r28
+    1cf6:	1f 91       	pop	r17
+    1cf8:	08 95       	ret
+
+00001cfa <main>:
+
+int main() __attribute__((naked));
+int main() {
+
+
+	cli();
+    1cfa:	f8 94       	cli
+#define UBRR_VAL	((CPU + BAUD * 8)/(BAUD * 16)-1)
+#define BAUD_REAL	(CPU/(16 * (UBRR_VAL + 1)))
+
+	//UBRR = 0;
+
+	UCSRB = (1<<TXEN)|(1<<RXEN);
+    1cfc:	88 e1       	ldi	r24, 0x18	; 24
+    1cfe:	8a b9       	out	0x0a, r24	; 10
+	UCSRC = //(1<<UMSEL01)|(0<<USBS0)|(0<<UCSZ02)|
+    1d00:	86 e8       	ldi	r24, 0x86	; 134
+    1d02:	80 bd       	out	0x20, r24	; 32
+	(1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);
+			//3<<UCSZ0;
+
+    UCSRA &= ~(1<<U2X);
+    1d04:	59 98       	cbi	0x0b, 1	; 11
+
+	//UBRR0 = 103;//(int)((F_CPU / (4800 * 16)) -1);
+	UBRRH = 0;//(unsigned char)(BAUD_REAL >> 8);
+    1d06:	10 bc       	out	0x20, r1	; 32
+	//UBRRL = 103;// 8MHz - 4800
+	UBRRL = 51;// 8MHz - 9600
+    1d08:	83 e3       	ldi	r24, 0x33	; 51
+    1d0a:	89 b9       	out	0x09, r24	; 9
+//	addr_l= 3000;do{_delay_us(1000);}while(addr_l-->0);
+//	PORTC = 0;
+//	addr_l= 3000;do{_delay_us(1000);}while(addr_l-->0);
+//	PORTC = 0xFF;
+//	addr_l= 000;
+	DDRC &= ~_BV(PC4);
+    1d0c:	a4 98       	cbi	0x14, 4	; 20
+	if ((PINC & _BV(PC4)))
+    1d0e:	9c 9b       	sbis	0x13, 4	; 19
+    1d10:	df c0       	rjmp	.+446    	; 0x1ed0 <main+0x1d6>
+				idx = 1;
+				do{
+					while (! _UARTRECEIVED);  nh = UDR;
+					while (! _UARTRECEIVED);  nl = UDR;
+				
+					addr[idx] = (hex2nibl(nh)<<4)|hex2nibl(nl);
+    1d12:	e0 90 60 00 	lds	r14, 0x0060
+    1d16:	f0 90 61 00 	lds	r15, 0x0061
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+	  UDR = ch;
+    1d1a:	3d e0       	ldi	r19, 0x0D	; 13
+    1d1c:	d3 2e       	mov	r13, r19
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1d1e:	0a e0       	ldi	r16, 0x0A	; 10
+    1d20:	2e e3       	ldi	r18, 0x3E	; 62
+    1d22:	a2 2e       	mov	r10, r18
+    1d24:	9a e3       	ldi	r25, 0x3A	; 58
+    1d26:	b9 2e       	mov	r11, r25
+    1d28:	80 e2       	ldi	r24, 0x20	; 32
+    1d2a:	c8 2e       	mov	r12, r24
+    1d2c:	5d 9b       	sbis	0x0b, 5	; 11
+    1d2e:	fe cf       	rjmp	.-4      	; 0x1d2c <main+0x32>
+	  UDR = ch;
+    1d30:	dc b8       	out	0x0c, r13	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1d32:	5d 9b       	sbis	0x0b, 5	; 11
+    1d34:	fe cf       	rjmp	.-4      	; 0x1d32 <main+0x38>
+	  UDR = ch;
+    1d36:	0c b9       	out	0x0c, r16	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1d38:	5d 9b       	sbis	0x0b, 5	; 11
+    1d3a:	fe cf       	rjmp	.-4      	; 0x1d38 <main+0x3e>
+	  UDR = ch;
+    1d3c:	ac b8       	out	0x0c, r10	; 12
+
+			putch(0x0D);putch(0x0A);putch('>');
+	
+
+			//wait for command
+			while (! _UARTRECEIVED); cmd= UDR;
+    1d3e:	5f 9b       	sbis	0x0b, 7	; 11
+    1d40:	fe cf       	rjmp	.-4      	; 0x1d3e <main+0x44>
+    1d42:	1c b1       	in	r17, 0x0c	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1d44:	5d 9b       	sbis	0x0b, 5	; 11
+    1d46:	fe cf       	rjmp	.-4      	; 0x1d44 <main+0x4a>
+	  UDR = ch;
+    1d48:	1c b9       	out	0x0c, r17	; 12
+			while (! _UARTRECEIVED); cmd= UDR;
+
+			putch(cmd);
+
+			//reset to 0000
+			if (cmd == 'X') {
+    1d4a:	18 35       	cpi	r17, 0x58	; 88
+    1d4c:	41 f4       	brne	.+16     	; 0x1d5e <main+0x64>
+					while(!(UCSRA&(1<<UDRE)));
+    1d4e:	5d 9b       	sbis	0x0b, 5	; 11
+    1d50:	fe cf       	rjmp	.-4      	; 0x1d4e <main+0x54>
+					//_JUMP_INIT;
+					app_start();
+    1d52:	e0 91 62 00 	lds	r30, 0x0062
+    1d56:	f0 91 63 00 	lds	r31, 0x0063
+    1d5a:	09 95       	icall
+    1d5c:	5d c0       	rjmp	.+186    	; 0x1e18 <main+0x11e>
+			};
+			//*
+
+			if (cmd == 'P') {  
+    1d5e:	10 35       	cpi	r17, 0x50	; 80
+    1d60:	d1 f5       	brne	.+116    	; 0x1dd6 <main+0xdc>
+    1d62:	21 e0       	ldi	r18, 0x01	; 1
+
+				//read the address
+				idx = 1;
+				do{
+					while (! _UARTRECEIVED);  nh = UDR;
+    1d64:	5f 9b       	sbis	0x0b, 7	; 11
+    1d66:	fe cf       	rjmp	.-4      	; 0x1d64 <main+0x6a>
+    1d68:	8c b1       	in	r24, 0x0c	; 12
+					while (! _UARTRECEIVED);  nl = UDR;
+    1d6a:	5f 9b       	sbis	0x0b, 7	; 11
+    1d6c:	fe cf       	rjmp	.-4      	; 0x1d6a <main+0x70>
+    1d6e:	9c b1       	in	r25, 0x0c	; 12
+uint8_t nibl2hex(uint8_t c);
+void boot_program_page (uint32_t page, uint8_t *buf);
+*/
+
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+    1d70:	8a 33       	cpi	r24, 0x3A	; 58
+    1d72:	10 f4       	brcc	.+4      	; 0x1d78 <main+0x7e>
+    1d74:	80 53       	subi	r24, 0x30	; 48
+    1d76:	01 c0       	rjmp	.+2      	; 0x1d7a <main+0x80>
+	else return c+10-'A';
+    1d78:	87 53       	subi	r24, 0x37	; 55
+uint8_t nibl2hex(uint8_t c);
+void boot_program_page (uint32_t page, uint8_t *buf);
+*/
+
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+    1d7a:	9a 33       	cpi	r25, 0x3A	; 58
+    1d7c:	10 f4       	brcc	.+4      	; 0x1d82 <main+0x88>
+    1d7e:	90 53       	subi	r25, 0x30	; 48
+    1d80:	01 c0       	rjmp	.+2      	; 0x1d84 <main+0x8a>
+	else return c+10-'A';
+    1d82:	97 53       	subi	r25, 0x37	; 55
+				idx = 1;
+				do{
+					while (! _UARTRECEIVED);  nh = UDR;
+					while (! _UARTRECEIVED);  nl = UDR;
+				
+					addr[idx] = (hex2nibl(nh)<<4)|hex2nibl(nl);
+    1d84:	f7 01       	movw	r30, r14
+    1d86:	e2 0f       	add	r30, r18
+    1d88:	f1 1d       	adc	r31, r1
+    1d8a:	82 95       	swap	r24
+    1d8c:	80 7f       	andi	r24, 0xF0	; 240
+    1d8e:	89 2b       	or	r24, r25
+    1d90:	80 83       	st	Z, r24
+				
+				}while(idx-- > 0);
+    1d92:	22 23       	and	r18, r18
+    1d94:	11 f0       	breq	.+4      	; 0x1d9a <main+0xa0>
+    1d96:	21 50       	subi	r18, 0x01	; 1
+    1d98:	e5 cf       	rjmp	.-54     	; 0x1d64 <main+0x6a>
+    1d9a:	91 e0       	ldi	r25, 0x01	; 1
+
+				//show the address
+				idx = 1;
+				do{ 
+					
+					nl = addr[idx];
+    1d9c:	f7 01       	movw	r30, r14
+    1d9e:	e9 0f       	add	r30, r25
+    1da0:	f1 1d       	adc	r31, r1
+    1da2:	e0 81       	ld	r30, Z
+					nh = nibl2hex((nl & 0xF0) >> 4);
+    1da4:	8e 2f       	mov	r24, r30
+    1da6:	82 95       	swap	r24
+    1da8:	8f 70       	andi	r24, 0x0F	; 15
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+	else return c+10-'A';
+}
+uint8_t nibl2hex(uint8_t c){
+	if (c < 10) return c + '0';
+    1daa:	8a 30       	cpi	r24, 0x0A	; 10
+    1dac:	10 f4       	brcc	.+4      	; 0x1db2 <main+0xb8>
+    1dae:	80 5d       	subi	r24, 0xD0	; 208
+    1db0:	01 c0       	rjmp	.+2      	; 0x1db4 <main+0xba>
+	else return c + 'A' - 10;
+    1db2:	89 5c       	subi	r24, 0xC9	; 201
+				idx = 1;
+				do{ 
+					
+					nl = addr[idx];
+					nh = nibl2hex((nl & 0xF0) >> 4);
+					nl = nibl2hex(nl & 0x0F);
+    1db4:	ef 70       	andi	r30, 0x0F	; 15
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+	else return c+10-'A';
+}
+uint8_t nibl2hex(uint8_t c){
+	if (c < 10) return c + '0';
+    1db6:	ea 30       	cpi	r30, 0x0A	; 10
+    1db8:	10 f4       	brcc	.+4      	; 0x1dbe <main+0xc4>
+    1dba:	e0 5d       	subi	r30, 0xD0	; 208
+    1dbc:	01 c0       	rjmp	.+2      	; 0x1dc0 <main+0xc6>
+	else return c + 'A' - 10;
+    1dbe:	e9 5c       	subi	r30, 0xC9	; 201
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1dc0:	5d 9b       	sbis	0x0b, 5	; 11
+    1dc2:	fe cf       	rjmp	.-4      	; 0x1dc0 <main+0xc6>
+	  UDR = ch;
+    1dc4:	8c b9       	out	0x0c, r24	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1dc6:	5d 9b       	sbis	0x0b, 5	; 11
+    1dc8:	fe cf       	rjmp	.-4      	; 0x1dc6 <main+0xcc>
+	  UDR = ch;
+    1dca:	ec b9       	out	0x0c, r30	; 12
+					nl = nibl2hex(nl & 0x0F);
+					
+					putch(nh);
+					
+					putch(nl);
+				} while (idx-- > 0);
+    1dcc:	99 23       	and	r25, r25
+    1dce:	09 f4       	brne	.+2      	; 0x1dd2 <main+0xd8>
+    1dd0:	ad cf       	rjmp	.-166    	; 0x1d2c <main+0x32>
+    1dd2:	91 50       	subi	r25, 0x01	; 1
+    1dd4:	e3 cf       	rjmp	.-58     	; 0x1d9c <main+0xa2>
+				//*
+			}
+
+			//Flash Read
+			if (cmd == 'R'){
+    1dd6:	12 35       	cpi	r17, 0x52	; 82
+    1dd8:	e9 f4       	brne	.+58     	; 0x1e14 <main+0x11a>
+    1dda:	c0 e0       	ldi	r28, 0x00	; 0
+    1ddc:	d0 e0       	ldi	r29, 0x00	; 0
+				idx = 0; 
+
+				
+
+				do{
+					cmd = pgm_read_byte(addr_l + idx);
+    1dde:	e0 91 64 00 	lds	r30, 0x0064
+    1de2:	f0 91 65 00 	lds	r31, 0x0065
+    1de6:	ec 0f       	add	r30, r28
+    1de8:	fd 1f       	adc	r31, r29
+    1dea:	14 91       	lpm	r17, Z+
+					puthex(cmd);
+    1dec:	81 2f       	mov	r24, r17
+    1dee:	34 df       	rcall	.-408    	; 0x1c58 <puthex>
+					if ((idx & 0x0F) == 0x0F) {
+    1df0:	ce 01       	movw	r24, r28
+    1df2:	8f 70       	andi	r24, 0x0F	; 15
+    1df4:	90 70       	andi	r25, 0x00	; 0
+    1df6:	0f 97       	sbiw	r24, 0x0f	; 15
+    1df8:	31 f4       	brne	.+12     	; 0x1e06 <main+0x10c>
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1dfa:	5d 9b       	sbis	0x0b, 5	; 11
+    1dfc:	fe cf       	rjmp	.-4      	; 0x1dfa <main+0x100>
+	  UDR = ch;
+    1dfe:	0c b9       	out	0x0c, r16	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1e00:	5d 9b       	sbis	0x0b, 5	; 11
+    1e02:	fe cf       	rjmp	.-4      	; 0x1e00 <main+0x106>
+	  UDR = ch;
+    1e04:	dc b8       	out	0x0c, r13	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1e06:	5d 9b       	sbis	0x0b, 5	; 11
+    1e08:	fe cf       	rjmp	.-4      	; 0x1e06 <main+0x10c>
+	  UDR = ch;
+    1e0a:	cc b8       	out	0x0c, r12	; 12
+    1e0c:	21 96       	adiw	r28, 0x01	; 1
+					if ((idx & 0x0F) == 0x0F) {
+						putch(0x0A);putch(0x0D);
+					} 
+					putch(' ');
+
+				}while(++idx < 64);
+    1e0e:	c0 34       	cpi	r28, 0x40	; 64
+    1e10:	d1 05       	cpc	r29, r1
+    1e12:	29 f7       	brne	.-54     	; 0x1dde <main+0xe4>
+				
+			}
+			//*
+
+			//Flash Write
+			if ((cmd == 'W')||(cmd == 'w')){
+    1e14:	17 35       	cpi	r17, 0x57	; 87
+    1e16:	11 f0       	breq	.+4      	; 0x1e1c <main+0x122>
+    1e18:	17 37       	cpi	r17, 0x77	; 119
+    1e1a:	a1 f5       	brne	.+104    	; 0x1e84 <main+0x18a>
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1e1c:	5d 9b       	sbis	0x0b, 5	; 11
+    1e1e:	fe cf       	rjmp	.-4      	; 0x1e1c <main+0x122>
+	  UDR = ch;
+    1e20:	bc b8       	out	0x0c, r11	; 12
+    1e22:	e8 e6       	ldi	r30, 0x68	; 104
+    1e24:	f0 e0       	ldi	r31, 0x00	; 0
+			//Flash Write
+			if ((cmd == 'W')||(cmd == 'w')){
+				putch(':');
+			
+				for( idx = 0; idx < SPM_PAGESIZE; idx++){
+					while (! _UARTRECEIVED);  nh = UDR;
+    1e26:	5f 9b       	sbis	0x0b, 7	; 11
+    1e28:	fe cf       	rjmp	.-4      	; 0x1e26 <main+0x12c>
+    1e2a:	8c b1       	in	r24, 0x0c	; 12
+					while (! _UARTRECEIVED);  nl = UDR;
+    1e2c:	5f 9b       	sbis	0x0b, 7	; 11
+    1e2e:	fe cf       	rjmp	.-4      	; 0x1e2c <main+0x132>
+    1e30:	9c b1       	in	r25, 0x0c	; 12
+uint8_t nibl2hex(uint8_t c);
+void boot_program_page (uint32_t page, uint8_t *buf);
+*/
+
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+    1e32:	8a 33       	cpi	r24, 0x3A	; 58
+    1e34:	10 f4       	brcc	.+4      	; 0x1e3a <main+0x140>
+    1e36:	80 53       	subi	r24, 0x30	; 48
+    1e38:	01 c0       	rjmp	.+2      	; 0x1e3c <main+0x142>
+	else return c+10-'A';
+    1e3a:	87 53       	subi	r24, 0x37	; 55
+uint8_t nibl2hex(uint8_t c);
+void boot_program_page (uint32_t page, uint8_t *buf);
+*/
+
+uint8_t hex2nibl(uint8_t c){
+	if (c <= '9') return c-'0';
+    1e3c:	9a 33       	cpi	r25, 0x3A	; 58
+    1e3e:	10 f4       	brcc	.+4      	; 0x1e44 <main+0x14a>
+    1e40:	90 53       	subi	r25, 0x30	; 48
+    1e42:	01 c0       	rjmp	.+2      	; 0x1e46 <main+0x14c>
+	else return c+10-'A';
+    1e44:	97 53       	subi	r25, 0x37	; 55
+				putch(':');
+			
+				for( idx = 0; idx < SPM_PAGESIZE; idx++){
+					while (! _UARTRECEIVED);  nh = UDR;
+					while (! _UARTRECEIVED);  nl = UDR;
+					buf[idx] = (hex2nibl(nh)<<4)|hex2nibl(nl);
+    1e46:	82 95       	swap	r24
+    1e48:	80 7f       	andi	r24, 0xF0	; 240
+    1e4a:	89 2b       	or	r24, r25
+    1e4c:	81 93       	st	Z+, r24
+
+			//Flash Write
+			if ((cmd == 'W')||(cmd == 'w')){
+				putch(':');
+			
+				for( idx = 0; idx < SPM_PAGESIZE; idx++){
+    1e4e:	80 e0       	ldi	r24, 0x00	; 0
+    1e50:	e8 3a       	cpi	r30, 0xA8	; 168
+    1e52:	f8 07       	cpc	r31, r24
+    1e54:	41 f7       	brne	.-48     	; 0x1e26 <main+0x12c>
+					while (! _UARTRECEIVED);  nh = UDR;
+					while (! _UARTRECEIVED);  nl = UDR;
+					buf[idx] = (hex2nibl(nh)<<4)|hex2nibl(nl);
+				}
+			
+				if (cmd == 'W')
+    1e56:	17 35       	cpi	r17, 0x57	; 87
+    1e58:	61 f4       	brne	.+24     	; 0x1e72 <main+0x178>
+					boot_program_page(addr_l, &buf);
+    1e5a:	60 91 64 00 	lds	r22, 0x0064
+    1e5e:	70 91 65 00 	lds	r23, 0x0065
+    1e62:	80 91 66 00 	lds	r24, 0x0066
+    1e66:	90 91 67 00 	lds	r25, 0x0067
+    1e6a:	48 e6       	ldi	r20, 0x68	; 104
+    1e6c:	50 e0       	ldi	r21, 0x00	; 0
+    1e6e:	09 df       	rcall	.-494    	; 0x1c82 <boot_program_page>
+    1e70:	5d cf       	rjmp	.-326    	; 0x1d2c <main+0x32>
+				else
+					eeprom_write_block(buf, addr_l, SPM_PAGESIZE);
+    1e72:	60 91 64 00 	lds	r22, 0x0064
+    1e76:	70 91 65 00 	lds	r23, 0x0065
+    1e7a:	88 e6       	ldi	r24, 0x68	; 104
+    1e7c:	90 e0       	ldi	r25, 0x00	; 0
+    1e7e:	40 e4       	ldi	r20, 0x40	; 64
+    1e80:	50 e0       	ldi	r21, 0x00	; 0
+    1e82:	3d d0       	rcall	.+122    	; 0x1efe <__eewr_block_m8>
+				//---
+			}
+			//*
+
+			//EEPROM read
+			if (cmd == 'r'){
+    1e84:	12 37       	cpi	r17, 0x72	; 114
+    1e86:	09 f0       	breq	.+2      	; 0x1e8a <main+0x190>
+    1e88:	51 cf       	rjmp	.-350    	; 0x1d2c <main+0x32>
+
+				eeprom_read_block(buf, addr_l, SPM_PAGESIZE);
+    1e8a:	60 91 64 00 	lds	r22, 0x0064
+    1e8e:	70 91 65 00 	lds	r23, 0x0065
+    1e92:	88 e6       	ldi	r24, 0x68	; 104
+    1e94:	90 e0       	ldi	r25, 0x00	; 0
+    1e96:	40 e4       	ldi	r20, 0x40	; 64
+    1e98:	50 e0       	ldi	r21, 0x00	; 0
+    1e9a:	21 d0       	rcall	.+66     	; 0x1ede <__eerd_block_m8>
+    1e9c:	c0 e0       	ldi	r28, 0x00	; 0
+    1e9e:	d0 e0       	ldi	r29, 0x00	; 0
+				idx = 0;
+				do{
+					cmd = buf[idx];
+					puthex(cmd);
+    1ea0:	fe 01       	movw	r30, r28
+    1ea2:	e8 59       	subi	r30, 0x98	; 152
+    1ea4:	ff 4f       	sbci	r31, 0xFF	; 255
+    1ea6:	80 81       	ld	r24, Z
+    1ea8:	d7 de       	rcall	.-594    	; 0x1c58 <puthex>
+					if ((idx & 0x0F) == 0x0F) {
+    1eaa:	ce 01       	movw	r24, r28
+    1eac:	8f 70       	andi	r24, 0x0F	; 15
+    1eae:	90 70       	andi	r25, 0x00	; 0
+    1eb0:	0f 97       	sbiw	r24, 0x0f	; 15
+    1eb2:	31 f4       	brne	.+12     	; 0x1ec0 <main+0x1c6>
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1eb4:	5d 9b       	sbis	0x0b, 5	; 11
+    1eb6:	fe cf       	rjmp	.-4      	; 0x1eb4 <main+0x1ba>
+	  UDR = ch;
+    1eb8:	0c b9       	out	0x0c, r16	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1eba:	5d 9b       	sbis	0x0b, 5	; 11
+    1ebc:	fe cf       	rjmp	.-4      	; 0x1eba <main+0x1c0>
+	  UDR = ch;
+    1ebe:	dc b8       	out	0x0c, r13	; 12
+	else return c + 'A' - 10;
+} 
+
+void putch(char ch) {
+//	#ifndef SOFT_UART
+	  while (!(UCSRA & _BV(UDRE)));
+    1ec0:	5d 9b       	sbis	0x0b, 5	; 11
+    1ec2:	fe cf       	rjmp	.-4      	; 0x1ec0 <main+0x1c6>
+	  UDR = ch;
+    1ec4:	cc b8       	out	0x0c, r12	; 12
+    1ec6:	21 96       	adiw	r28, 0x01	; 1
+					if ((idx & 0x0F) == 0x0F) {
+						putch(0x0A);putch(0x0D);
+					} 
+					putch(' ');
+
+				}while(++idx < 64);
+    1ec8:	c0 34       	cpi	r28, 0x40	; 64
+    1eca:	d1 05       	cpc	r29, r1
+    1ecc:	49 f7       	brne	.-46     	; 0x1ea0 <main+0x1a6>
+    1ece:	2e cf       	rjmp	.-420    	; 0x1d2c <main+0x32>
+			
+		
+	}while(1);
+
+	else
+	  app_start();
+    1ed0:	e0 91 62 00 	lds	r30, 0x0062
+    1ed4:	f0 91 63 00 	lds	r31, 0x0063
+    1ed8:	09 95       	icall
+
+
+} //main()
+    1eda:	80 e0       	ldi	r24, 0x00	; 0
+    1edc:	90 e0       	ldi	r25, 0x00	; 0
+
+00001ede <__eerd_block_m8>:
+    1ede:	dc 01       	movw	r26, r24
+    1ee0:	cb 01       	movw	r24, r22
+
+00001ee2 <__eerd_blraw_m8>:
+    1ee2:	fc 01       	movw	r30, r24
+    1ee4:	e1 99       	sbic	0x1c, 1	; 28
+    1ee6:	fe cf       	rjmp	.-4      	; 0x1ee4 <__eerd_blraw_m8+0x2>
+    1ee8:	06 c0       	rjmp	.+12     	; 0x1ef6 <__eerd_blraw_m8+0x14>
+    1eea:	ff bb       	out	0x1f, r31	; 31
+    1eec:	ee bb       	out	0x1e, r30	; 30
+    1eee:	e0 9a       	sbi	0x1c, 0	; 28
+    1ef0:	31 96       	adiw	r30, 0x01	; 1
+    1ef2:	0d b2       	in	r0, 0x1d	; 29
+    1ef4:	0d 92       	st	X+, r0
+    1ef6:	41 50       	subi	r20, 0x01	; 1
+    1ef8:	50 40       	sbci	r21, 0x00	; 0
+    1efa:	b8 f7       	brcc	.-18     	; 0x1eea <__eerd_blraw_m8+0x8>
+    1efc:	08 95       	ret
+
+00001efe <__eewr_block_m8>:
+    1efe:	dc 01       	movw	r26, r24
+    1f00:	cb 01       	movw	r24, r22
+    1f02:	02 c0       	rjmp	.+4      	; 0x1f08 <__eewr_block_m8+0xa>
+    1f04:	2d 91       	ld	r18, X+
+    1f06:	05 d0       	rcall	.+10     	; 0x1f12 <__eewr_r18_m8>
+    1f08:	41 50       	subi	r20, 0x01	; 1
+    1f0a:	50 40       	sbci	r21, 0x00	; 0
+    1f0c:	d8 f7       	brcc	.-10     	; 0x1f04 <__eewr_block_m8+0x6>
+    1f0e:	08 95       	ret
+
+00001f10 <__eewr_byte_m8>:
+    1f10:	26 2f       	mov	r18, r22
+
+00001f12 <__eewr_r18_m8>:
+    1f12:	e1 99       	sbic	0x1c, 1	; 28
+    1f14:	fe cf       	rjmp	.-4      	; 0x1f12 <__eewr_r18_m8>
+    1f16:	9f bb       	out	0x1f, r25	; 31
+    1f18:	8e bb       	out	0x1e, r24	; 30
+    1f1a:	2d bb       	out	0x1d, r18	; 29
+    1f1c:	0f b6       	in	r0, 0x3f	; 63
+    1f1e:	f8 94       	cli
+    1f20:	e2 9a       	sbi	0x1c, 2	; 28
+    1f22:	e1 9a       	sbi	0x1c, 1	; 28
+    1f24:	0f be       	out	0x3f, r0	; 63
+    1f26:	01 96       	adiw	r24, 0x01	; 1
+    1f28:	08 95       	ret
+
+00001f2a <_exit>:
+    1f2a:	f8 94       	cli
+
+00001f2c <__stop_program>:
+    1f2c:	ff cf       	rjmp	.-2      	; 0x1f2c <__stop_program>
